@@ -1,0 +1,18 @@
+{% include "included/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="map-div">
+  <div class="place-autocomplete-card" id="place-autocomplete-card">
+    <p style="color: black;">Search for a place here:</p>
+    <div class="map-input">
+      <button id="start-btn">Start</button>
+      <button id="end-btn">End</button>
+      <div class="map-input">
+        <button id="confirm-btn">Confirm</button>
+        <button id="reset-btn">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div id="map"></div>
+</div>
+{% endblock body %}
