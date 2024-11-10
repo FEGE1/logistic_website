@@ -21,7 +21,7 @@ class Destination_location(models.Model): # Durak yerine bu sınıfı kullanaca�
     company_name = models.CharField(max_length=200)
     company_number = models.CharField(max_length=12)
     address = models.TextField()
-    pickup_date = models.DateTimeField()
+    delivery_date = models.DateTimeField()
 
 class Vehicle(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='Vehicle')

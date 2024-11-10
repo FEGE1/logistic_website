@@ -15,7 +15,7 @@ class Receiving_location_form(forms.ModelForm):
 class Destination_location_form(forms.ModelForm):
     class Meta():
         model = Destination_location
-        fields = ('company_name','company_number','address','pickup_date')
+        fields = ('company_name','company_number','address','delivery_date')
 
 class Vehicle_form(forms.ModelForm):
     class Meta():
