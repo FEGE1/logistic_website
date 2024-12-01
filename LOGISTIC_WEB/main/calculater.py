@@ -79,8 +79,8 @@ def Calculate_Orders():
         if order[1] is None:
             waiting_list.append(order)
 
-    while True:
-        print("while çalıştı")
+    stop_sign=False
+    while stop_sign==False:
 
         if not Get_Filter_Table("orders","truck_id","NULL"):
             print("Tüm siparişlere araç atanmıştır !!!")
@@ -116,8 +116,8 @@ def Calculate_Orders():
                                     Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                     Update_Space(order,truck)
                             except:
-                                print("Hata kodu 001")
-                        
+                                print("Hata: Tırdaki sipariş bulunamadı\nTır ID: {}\nİşlemdeki sipariş ID: {}".format(truck_id,order_id))
+                                stop_sign=True
 
                 elif trucks_same_space_with_orders_empty:
                     for truck in trucks_same_space_with_orders_empty:
