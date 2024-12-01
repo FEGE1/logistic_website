@@ -45,12 +45,25 @@ def Add_Value(table,column,value,id):
     execute0 = "UPDATE {} SET {}={} WHERE id={}".format(table,column,value,id)
     cursor.execute(execute0)
     con.commit()
-    
+
+def Route_Limiter(x,y,time_limit):
+    x_receiving=x[3]
+    x_destination=x[4]
+    y_receiving=y[3]
+    y_destination=y[4]
+
+    total_time_dif = abs(x_receiving-y_receiving)+abs(x_destination-y_destination)
+
+    if total_time_dif <= time_limit:
+        return True
+    else:
+        return False
+
 def Calculate_Orders():
-    ordered_by_size=Order_By_Table("orders","size")
+    orders_by_size=Order_By_Table("orders","size")
     waiting_list=[]
 
-    for order in ordered_by_size:
+    for order in orders_by_size:
         if order[1] is None:
             waiting_list.append(order)
 
@@ -60,10 +73,49 @@ def Calculate_Orders():
         if not Get_Filter_Table("orders","truck_id","NULL"):
             print("Tüm siparişlere araç atanmıştır !!!")
             break
+
         else:
             for order in waiting_list:
-                
+                order_size = order[5]
+                order_id = order[0]
+                trucks_ordered_by_space=Order_By_Table("trucks","space")
+                trucks_same_space_with_orders = []
 
+                for truck in trucks_ordered_by_space:
+                    if order_size == truck[3] and truck[4] < 2:
+                        trucks_same_space_with_orders.append(truck)
+
+                # Önceliğimiz tırın tam dolu gitmesi, bu yüzden öncelikle siparişin boyutu ile aynı boş yere sahip olan tırları deneyeceğiz
+                if trucks_same_space_with_orders:
+                    for truck in trucks_same_space_with_orders:
+                        if truck[4] < 2: # Şimdilik her tıra maks 2 sipariş atama limiti koydum
+                            truck_id = truck[0]
+                            truck_space = truck[-1]
+
+                            order_in_truck = list(Get_Filter_Table("orders","truck_id",truck_id))[0]
+
+                            if not order_in_truck:
+                                Add_Value('orders','truck_id',truck_id,order_id)
+
+                            else:
+                                if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                                    Add_Value('orders','truck_id',truck_id,order_id)
+
+                # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
+                else:
+                    for trucks in trucks_ordered_by_space:
+                        if truck[4] < 2: # Şimdilik her tıra maks 2 sipariş atama limiti koydum
+                            truck_id = truck[0]
+                            truck_space = truck[-1]
+
+                            order_in_truck = list(Get_Filter_Table("orders","truck_id",truck_id))[0]
+
+                            if not order_in_truck:
+                                Add_Value('orders','truck_id',truck_id,order_id)
+                                
+                            else:
+                                if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                                    Add_Value('orders','truck_id',truck_id,order_id)
 
     print(waiting_list)
         
