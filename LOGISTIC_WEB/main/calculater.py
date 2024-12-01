@@ -55,6 +55,14 @@ def Update_Space(order,truck):
 
     Update_Value("trucks","space",update_space,"truck_id",truck_id)
 
+def Check_Order_Is_Calculated(order_id):
+    order_truck_id = (Get_Filter_Table('orders','id',order_id))[0][1]
+    print(order_truck_id)
+    if order_truck_id is None:
+        return False
+    else:
+        return True
+
 def Route_Limiter(x,y,time_limit):
     x_receiving=int(x[3])
     x_destination=int(x[4])
@@ -121,16 +129,18 @@ def Calculate_Orders():
 
                 elif trucks_same_space_with_orders_empty:
                     for truck in trucks_same_space_with_orders_empty:
-                        if truck[4] < 2: # Şimdilik her tıra maks 2 sipariş atama limiti koydum
+                        if truck[4] < 2 and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
-                            order_in_truck = Get_Filter_Table("orders","truck_id",truck_id)
 
                             # Tır komple boş ise direkt ata
-                            if not order_in_truck:
-                                Update_Value('orders','truck_id',truck_id,"id",order_id)
-                                Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
-                                Update_Space(order,truck)
+                            Update_Value('orders','truck_id',truck_id,"id",order_id)
+                            Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
+                            Update_Space(order,truck)
+                            
+                        else:
+                            print("ikinci atama durduruldu (Sipariş zaten başka bir tıra atanmış !)")
+                            stop_sign=True
 
                 # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
                 else:
@@ -162,6 +172,7 @@ while True:
     print("4- Get Table")
     print("5- Get Table With Filter")
     print("6- Add Value to Row")
+    print("Else- Try Print")
     print("q- Quit")
 
     operation = str(input("Select: ")).lower()
@@ -203,5 +214,7 @@ while True:
                 Update_Value(table,column,value,id_column_name,id)
             except:
                 print("Veri Ekleme Başarısız !!!")
+        else: 
+            Check_Order_Is_Calculated(1)
     
 # Locations = {0,1,2,3,4,5,6,7,8,9,10}
