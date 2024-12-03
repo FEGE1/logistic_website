@@ -95,6 +95,7 @@ def Calculate_Orders():
             break
 
         else:
+            # Space değeri order size değeri ile aynı olan tırları listeye aktarmak için #
             for order in waiting_list:
                 order_size = order[5]
                 order_id = order[0]
@@ -108,11 +109,12 @@ def Calculate_Orders():
                             trucks_same_space_with_orders.append(truck)
                         else:
                             trucks_same_space_with_orders_empty.append(truck)
-
-                # Önceliğimiz tırın tam dolu gitmesi, bu yüzden öncelikle siparişin boyutu ile aynı boş yere sahip olan tırları deneyeceğiz
+            # ------------------------------------------------------------------------- #
+               
+                # Önceliğimiz tırın tam dolu gitmesi, bu yüzden öncelikle siparişin boyutu ile aynı boş yere sahip olan tırları deneyeceğiz (önce number_of_orders != 0 olan tırlar)
                 if trucks_same_space_with_orders:
                     for truck in trucks_same_space_with_orders:
-                        if truck[4] < 2: # Şimdilik her tıra maks 2 sipariş atama limiti koydum
+                        if truck[4] < 2 and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
                             order_in_truck = Get_Filter_Table("orders","truck_id",truck_id)
@@ -137,16 +139,27 @@ def Calculate_Orders():
                             Update_Value('orders','truck_id',truck_id,"id",order_id)
                             Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                             Update_Space(order,truck)
-                            
+
                         else:
                             print("ikinci atama durduruldu (Sipariş zaten başka bir tıra atanmış !)")
                             stop_sign=True
 
                 # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
                 else:
+
+                    # Space değeri order size değerinden yüksek olan ve içinde sipariş olan tırları listeye aktarmak için #
+                    trucks_bigger_space_with_orders=[]
+                    trucks_bigger_space_with_orders_empty=[]
+                    for truck in trucks_ordered_by_space:
+                        if order_size < truck[3] and truck[4] < 2:
+                            if truck[4] == 1:
+                                trucks_bigger_space_with_orders.append(truck)
+                            else:
+                                trucks_bigger_space_with_orders_empty.append(truck)
+                    # Burda kaldım (yukarısı)
                     for truck in trucks_ordered_by_space:
                         truck_space = truck[3]
-                        if truck[4] < 2 and truck_space > order_size: # Şimdilik her tıra maks 2 sipariş atama limiti koydum
+                        if truck[4] < 2 and truck_space > order_size and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
                             order_in_truck = list(Get_Filter_Table("orders","truck_id",truck_id))[0]
@@ -161,6 +174,10 @@ def Calculate_Orders():
                                     Update_Value('orders','truck_id',truck_id,"id",order_id)
                                     Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                     Update_Space(order,truck)
+                        else:
+                            print("ikinci atama durduruldu (Sipariş zaten başka bir tıra atanmış !)")
+                            stop_sign=True
+                    # ------------------------------------------------------------------------- #
 
 # MAIN SECTION
 
