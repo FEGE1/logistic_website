@@ -68,8 +68,6 @@ def Route_Limiter(x,y,time_limit):
     x_destination=int(x[4])
     y_receiving=int(y[3])
     y_destination=int(y[4])
-    print(x)
-    print(y)
 
     total_time_dif = (abs(x_receiving-y_receiving))+(abs(x_destination-y_destination))
     print(total_time_dif)
@@ -102,6 +100,8 @@ def Calculate_Orders():
                 trucks_ordered_by_space=Order_By_Table("trucks","space")
                 trucks_same_space_with_orders = []
                 trucks_same_space_with_orders_empty = []
+                trucks_bigger_space_with_orders=[]
+                trucks_bigger_space_with_orders_empty=[]
 
                 for truck in trucks_ordered_by_space:
                     if order_size == truck[3] and truck[4] < 2:
@@ -110,6 +110,14 @@ def Calculate_Orders():
                         else:
                             trucks_same_space_with_orders_empty.append(truck)
             # ------------------------------------------------------------------------- #
+            # Space değeri order size değerinden yüksek olan ve içinde sipariş olan tırları listeye aktarmak için #
+                    for truck in trucks_ordered_by_space:
+                        if order_size < truck[3] and truck[4] < 2:
+                            if truck[4] == 1:
+                                trucks_bigger_space_with_orders.append(truck)
+                            else:
+                                trucks_bigger_space_with_orders_empty.append(truck)
+            # ------------------------------------------------------------------------- #
                
                 # Önceliğimiz tırın tam dolu gitmesi, bu yüzden öncelikle siparişin boyutu ile aynı boş yere sahip olan tırları deneyeceğiz (önce number_of_orders != 0 olan tırlar)
                 if trucks_same_space_with_orders:
@@ -117,11 +125,10 @@ def Calculate_Orders():
                         if truck[4] < 2 and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
-                            order_in_truck = Get_Filter_Table("orders","truck_id",truck_id)
+                            order_in_truck = Get_Filter_Table("orders","truck_id",truck_id)[0]
 
-                            # Tır komple boş ise direkt ata
                             try:
-                                if Route_Limiter(order,order_in_truck[0],2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                                if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
                                     Update_Value('orders','truck_id',truck_id,"id",order_id)
                                     Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                     Update_Space(order,truck)
@@ -145,38 +152,29 @@ def Calculate_Orders():
                             stop_sign=True
 
                 # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
-                else:
-
-                    # Space değeri order size değerinden yüksek olan ve içinde sipariş olan tırları listeye aktarmak için #
-                    trucks_bigger_space_with_orders=[]
-                    trucks_bigger_space_with_orders_empty=[]
-                    for truck in trucks_ordered_by_space:
-                        if order_size < truck[3] and truck[4] < 2:
-                            if truck[4] == 1:
-                                trucks_bigger_space_with_orders.append(truck)
-                            else:
-                                trucks_bigger_space_with_orders_empty.append(truck)
-                    # Burda kaldım (yukarısı)
-                    for truck in trucks_ordered_by_space:
+                elif trucks_bigger_space_with_orders:
+                    for truck in trucks_bigger_space_with_orders:
                         truck_space = truck[3]
                         if truck[4] < 2 and truck_space > order_size and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
                             order_in_truck = list(Get_Filter_Table("orders","truck_id",truck_id))[0]
+                            print(str(truck_id)+":truck id")
+                            print(str(truck_number_order)+":truck number of order")
+                            print(order_in_truck)
 
-                            if not order_in_truck:
+                          
+                            if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
                                 Update_Value('orders','truck_id',truck_id,"id",order_id)
                                 Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                 Update_Space(order,truck)
-                                
-                            else:
-                                if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
-                                    Update_Value('orders','truck_id',truck_id,"id",order_id)
-                                    Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
-                                    Update_Space(order,truck)
-                        else:
-                            print("ikinci atama durduruldu (Sipariş zaten başka bir tıra atanmış !)")
-                            stop_sign=True
+                            
+                    if not Check_Order_Is_Calculated(order_id):
+                        print("Uygun hiç bir araç bulunamadı. Sipariş ID: " + str(order_id))
+
+                else:
+                    print("Genel Hata !!! (Sıkıntı büyük)")
+                    stop_sign=True
                     # ------------------------------------------------------------------------- #
 
 # MAIN SECTION
@@ -232,6 +230,9 @@ while True:
             except:
                 print("Veri Ekleme Başarısız !!!")
         else: 
-            Check_Order_Is_Calculated(1)
+            if Route_Limiter((1,None,'active','2','7',6),(3,2,'active','2','6',6),2):
+                print("Rota çalıştı")
+            else:
+                print("Rota çalışmadı")
     
 # Locations = {0,1,2,3,4,5,6,7,8,9,10}
