@@ -43,7 +43,6 @@ def Order_By_Table(table,column):
 
 def Update_Value(table,column,value,id_column_name,id):
     execute0 = "UPDATE {} SET {}={} WHERE {}={}".format(table,column,value,id_column_name,id)
-    print(execute0)
     cursor.execute(execute0)
     con.commit()
 
@@ -57,7 +56,6 @@ def Update_Space(order,truck):
 
 def Check_Order_Is_Calculated(order_id):
     order_truck_id = (Get_Filter_Table('orders','id',order_id))[0][1]
-    print(order_truck_id)
     if order_truck_id is None:
         return False
     else:
@@ -70,7 +68,6 @@ def Route_Limiter(x,y,time_limit):
     y_destination=int(y[4])
 
     total_time_dif = (abs(x_receiving-y_receiving))+(abs(x_destination-y_destination))
-    print(total_time_dif)
 
     if total_time_dif <= time_limit:
         return True
@@ -111,17 +108,18 @@ def Calculate_Orders():
                             trucks_same_space_with_orders_empty.append(truck)
             # ------------------------------------------------------------------------- #
             # Space değeri order size değerinden yüksek olan ve içinde sipariş olan tırları listeye aktarmak için #
-                    for truck in trucks_ordered_by_space:
-                        if order_size < truck[3] and truck[4] < 2:
-                            if truck[4] == 1:
-                                trucks_bigger_space_with_orders.append(truck)
-                            else:
-                                trucks_bigger_space_with_orders_empty.append(truck)
+                for truck in trucks_ordered_by_space:
+                    if order_size < truck[3] and truck[4] < 2:
+                        if truck[4] == 1:
+                            trucks_bigger_space_with_orders.append(truck)
+                        else:
+                            trucks_bigger_space_with_orders_empty.append(truck)
             # ------------------------------------------------------------------------- #
-               
+                print(trucks_bigger_space_with_orders)
                 # Önceliğimiz tırın tam dolu gitmesi, bu yüzden öncelikle siparişin boyutu ile aynı boş yere sahip olan tırları deneyeceğiz (önce number_of_orders != 0 olan tırlar)
                 if trucks_same_space_with_orders:
                     for truck in trucks_same_space_with_orders:
+                        print("same space çalıştı")
                         if truck[4] < 2 and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
@@ -129,6 +127,7 @@ def Calculate_Orders():
 
                             try:
                                 if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                                    print("same space route limiter çalıştı")
                                     Update_Value('orders','truck_id',truck_id,"id",order_id)
                                     Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                     Update_Space(order,truck)
@@ -153,6 +152,7 @@ def Calculate_Orders():
 
                 # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
                 elif trucks_bigger_space_with_orders:
+                    print("Bigger space çalıştı")
                     for truck in trucks_bigger_space_with_orders:
                         truck_space = truck[3]
                         if truck[4] < 2 and truck_space > order_size and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
