@@ -131,9 +131,15 @@ def Calculate_Orders():
                                     Update_Value('orders','truck_id',truck_id,"id",order_id)
                                     Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                     Update_Space(order,truck)
+
+                                    stop_sign = True
                             except:
                                 print("Hata: Tırdaki sipariş bulunamadı\nTır ID: {}\nİşlemdeki sipariş ID: {}".format(truck_id,order_id))
-                                stop_sign=True
+                    
+                    if not Check_Order_Is_Calculated(order_id):
+                        continue
+                    else:
+                        stop_sign = True
 
                 elif trucks_same_space_with_orders_empty:
                     for truck in trucks_same_space_with_orders_empty:
@@ -142,35 +148,70 @@ def Calculate_Orders():
                             truck_number_order = truck[4]
 
                             # Tır komple boş ise direkt ata
-                            Update_Value('orders','truck_id',truck_id,"id",order_id)
-                            Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
-                            Update_Space(order,truck)
-
-                        else:
-                            print("ikinci atama durduruldu (Sipariş zaten başka bir tıra atanmış !)")
-                            stop_sign=True
+                            try:
+                                Update_Value('orders','truck_id',truck_id,"id",order_id)
+                                Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
+                                Update_Space(order,truck)
+                            except:
+                                print("Atama işleminde hata")
+                    
+                    if not Check_Order_Is_Calculated(order_id):
+                        continue
+                    else:
+                        stop_sign=True
 
                 # Hiç bir tırla eşleşme olmadıysa farklı space'e sahip tırları deneyeceğiz
                 elif trucks_bigger_space_with_orders:
-                    print("Bigger space çalıştı")
+                    # trucks_bigger_space_with_orders listesini ters çevirip önce daha az yere sahip olan araçları denemesini sağlıyoruz
+                    # Bu sayede size' ı 7 olan siparişi, 10 space'i olan yerine 15 space'i olan araca atamasın
+                    trucks_bigger_space_with_orders.reverse()
                     for truck in trucks_bigger_space_with_orders:
                         truck_space = truck[3]
                         if truck[4] < 2 and truck_space > order_size and not Check_Order_Is_Calculated(order_id): # Şimdilik her tıra maks 2 sipariş atama limiti koydum
                             truck_id = truck[0]
                             truck_number_order = truck[4]
                             order_in_truck = list(Get_Filter_Table("orders","truck_id",truck_id))[0]
-                            print(str(truck_id)+":truck id")
-                            print(str(truck_number_order)+":truck number of order")
-                            print(order_in_truck)
 
-                          
-                            if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                            try:
+                                if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
+                                    Update_Value('orders','truck_id',truck_id,"id",order_id)
+                                    Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
+                                    Update_Space(order,truck)
+
+                                    stop_sign = True
+                            
+                            except:
+                                print("Hata: Tırdaki sipariş bulunamadı\nTır ID: {}\nİşlemdeki sipariş ID: {}".format(truck_id,order_id))
+
+                    if not Check_Order_Is_Calculated(order_id):
+                        continue
+                    else:
+                        stop_sign=True
+
+                                # BURADA BİR SIKINTI VAR BİGGER_EMPTY OLANLARA DA BAKMASI LAZIM ONU UNUTMUŞUM !!!
+
+                elif trucks_bigger_space_with_orders_empty:
+
+                    trucks_bigger_space_with_orders_empty.reverse()
+                    for truck in trucks_bigger_space_with_orders_empty:
+                        truck_space = truck[3]
+                        if truck[4] == 0 and truck_space > order_size and not Check_Order_Is_Calculated(order_id):
+                            truck_id = truck[0]
+                            truck_number_order = truck[4]
+                            
+                            try:
                                 Update_Value('orders','truck_id',truck_id,"id",order_id)
                                 Update_Value('trucks','number_of_orders',(truck_number_order+1),'truck_id',truck_id)
                                 Update_Space(order,truck)
-                            
+
+                                stop_sign = True
+                            except:
+                                print("Atama işleminde hata")
+
                     if not Check_Order_Is_Calculated(order_id):
-                        print("Uygun hiç bir araç bulunamadı. Sipariş ID: " + str(order_id))
+                        continue
+                    else:
+                        stop_sign=True
 
                 else:
                     print("Genel Hata !!! (Sıkıntı büyük)")
@@ -234,5 +275,3 @@ while True:
                 print("Rota çalıştı")
             else:
                 print("Rota çalışmadı")
-    
-# Locations = {0,1,2,3,4,5,6,7,8,9,10}
