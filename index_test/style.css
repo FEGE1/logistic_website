@@ -14,17 +14,23 @@ body{
     font-weight: 500;
     font-style: normal;
 }
+/* General */
 
-section{
-    padding: 100px 0;
-    background: #1B2223;
-}
-header{
-    background:#1B2223 ;
-    border-bottom: 1px solid rgb(rgb(46, 41, 41), green, blue);
-    position: fixed;
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    z-index: 5;
+}
+
+.center{
+    justify-content: center!important;
+}
+
+/* */
+header{
+    top: 0;
+    width: 100%;
 }
 #logo h2 {
     color: #fff;
@@ -34,19 +40,22 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background:#1B2223 ;
     height: 40px;
 }
 
 /* Navbar */
 .navbar{
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     height: 86px;
-    width: 90%;
+    width: 100%;
+    padding: 0 4%;
     background-color: #1B2223;
-    padding: 10px 0; 
     font-size: 14px;
 }
 .nav-links{
@@ -95,23 +104,22 @@ header{
 }
 
 /*ANASAYFA*/
-.merve{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+#home{
     width: 100%;
     height: 800px;
+    padding-top: 126px;
+    background-image: url("../assets/images/welcome-hero/banner.jpg");
 }
-.child_anasayfa{
-    flex-basis: 45%;
+.child_home{
+    flex-basis: 50%;
 }
-.child_anasayfa h1{
+.child_home h1{
     font-size: 50px;
-    color: #080326;
+    color: white;
 }
-.child_anasayfa p{
-    font-size: 25px;
+.child_home p{
+    color: white;
+    font-size: 18px;
     margin-bottom: 12px;
 }
 /*SEARCHBARLAR*/
