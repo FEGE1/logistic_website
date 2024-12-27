@@ -16,7 +16,7 @@
     <!--NAVBAR-->
     <header>
         <div id="top-bar">
-            <div>
+            <div class="flex">
                 <select name="language" id="language">
                     <option value="default">ENG</option>
                     <option value="Türkçe">TR</option>
@@ -26,8 +26,9 @@
                     <option value="TRY">TRY</option>
                 </select>
             </div>
-            <div>
+            <div class="flex">
                 <p>+1 222 333 444</p>
+                <span></span>
                 <p>+90 222 333 444</p>
             </div>
         </div>
@@ -55,33 +56,34 @@
         <div class="flex center">
             <div class="child_home">
                 <h1>LOJISTIKTE <span style="color:#0EF6CC;">1 NUMARA</span></h1>
+                <br>
                 <p>Lorem, ipsus Eius ex voluptatum odit! Voluptas, a? Quae.</p>
             </div>
         </div>
     
         <!--SEARCHBARLAR-->
-        <div id="searchbar" class="welcome-hero">
-            <div class="welcome-hero-form">
-                <div class="single-welcome-hero-form">
-                    <h3>Gönderen</h3>
-                    <form action="index.html">
-                        <input type="text" placeholder="Lorem">
-                    </form> 
+        <div id="route-search" class="flex">
+            <div id="route-left" class="flex">
+                <div class="flex route-input">
+                    <p>Receiving</p>
+                    <input type="text" placeholder="Receiving">
+                    <p>O</p>
                 </div>
-                <div class="single-welcome-hero-form">
-                    <h3>Alici</h3>
-                    <form action="index.html">
-                        <input type="text" placeholder="Lorem">
-                    </form>
+                <div class="flex route-input">
+                    <p>Destination</p>
+                    <input type="text" placeholder="Destination">
+                    <p>O</p>
                 </div>
-                <div class="single-welcome-hero-form">
-                    <h3>Ulasim</h3>
-                    <form action="index.html">
-                        <input type="text" placeholder="Lorem">
-                    </form>
+                <div class="flex route-input">
+                    <p>Deneme</p>
+                    <input type="text" placeholder="Deneme">
+                    <p>O</p>
                 </div>
             </div>
+            <button id="route-btn">Search</button>
+
         </div>
+        <span style="background-color:rgba(49, 54, 63, 0.57);width: 100%;height: 100%;position: absolute;top:0;z-index: 1;"></span>
     </section>
     <section id="aboutus" class="blog">
         <div class="container">
