@@ -14,17 +14,23 @@ body{
     font-weight: 500;
     font-style: normal;
 }
+/* General */
 
-section{
-    padding: 100px 0;
-    background: #1B2223;
-}
-header{
-    background:#1B2223 ;
-    border-bottom: 1px solid rgb(rgb(46, 41, 41), green, blue);
-    position: fixed;
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    z-index: 5;
+}
+
+.center{
+    justify-content: center!important;
+}
+
+/* */
+header{
+    top: 0;
+    width: 100%;
 }
 #logo h2 {
     color: #fff;
@@ -34,19 +40,48 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background:#1B2223 ;
     height: 40px;
+    width: 100%;
+    border-bottom: solid 1px #3A4F50;
+}
+
+#top-bar div:first-child{
+    height: 100%;
+    width: 100px;
+}
+
+#top-bar div:last-child{
+    color: #0EF6CC;
+    font-size: 12px;
+    width: 210px;
+    height: 100%;
+    border-left: solid 1px #3A4F50;
+}
+
+#top-bar div:last-child p{
+    margin: 0 5px 0 5px;
+}
+
+#top-bar .flex span{
+    width: 1px;
+    height: 100%;
+    background: #3A4F50;
 }
 
 /* Navbar */
 .navbar{
     display: flex;
+    gap: 100px;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     height: 86px;
-    width: 90%;
+    width: 100%;
+    padding: 0 12%;
     background-color: #1B2223;
-    padding: 10px 0; 
     font-size: 14px;
 }
 .nav-links{
@@ -56,11 +91,10 @@ header{
     align-items: center;
 }
 .nav-links li a{
-   margin-left: 15px;
-   color: #3A4F50;
-   padding: 5px 15px;
-   border-radius: 5px;
-   transition: all .3s ease-in-out;
+    margin-left: 20px;
+    color: #3A4F50;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
 }
 .nav-links li a:hover{
     color: #0EF6CC;
@@ -95,37 +129,70 @@ header{
 }
 
 /*ANASAYFA*/
-.merve{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+#home{
+    position: relative;
     width: 100%;
     height: 800px;
+    background-image: url("../assets/images/welcome-hero/banner.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
-.child_anasayfa{
-    flex-basis: 45%;
+.child_home{
+    text-align: center;
+    flex-basis: 50%;
+    z-index: 2;
+    margin-top: 155px;
 }
-.child_anasayfa h1{
-    font-size: 50px;
-    color: #080326;
+.child_home h1{
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
 }
-.child_anasayfa p{
-    font-size: 25px;
+.child_home p{
+    color: white;
+    font-size: 18px;
     margin-bottom: 12px;
 }
-/*SEARCHBARLAR*/
-.welcome-hero{
+/* Route-Search */
+#route-search{
     position: relative;
-    background-position:center ;
+    border-radius: 3px;
+    z-index: 3;
+    margin: 90px auto;
+    width: 87%;
+    height: 70px;
+    background-color: #1B2223;
 }
 
-.welcome-hero-form{
-    display: flex;
+#route-left{
+    height: 100%;
 }
 
-.welcome-hero-form input{
+#route-left p{
+    color: #0EF6CC;
+}
+
+.route-input{
+    padding: 0 20px;
+    height: 100%;
+    border-right: 2px solid rgb(60, 60, 60);
+}
+
+.route-input input{
     border: none;
-    height: 30px;
-    width: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    box-shadow: none;
+    outline: 0!important;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#route-btn{
+    width: 180px;
+    height: 70px;
+    background: #0EF6CC;
+    border: none;
+    border-radius: 3px;
 }
