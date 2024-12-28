@@ -44,29 +44,44 @@ header{
     height: 40px;
     width: 100%;
     border-bottom: solid 1px #3A4F50;
-}
-
-#top-bar div:first-child{
-    height: 100%;
-    width: 100px;
-}
-
-#top-bar div:last-child{
-    color: #0EF6CC;
     font-size: 12px;
-    width: 210px;
-    height: 100%;
-    border-left: solid 1px #3A4F50;
+    font-weight: 300;
 }
 
-#top-bar div:last-child p{
-    margin: 0 5px 0 5px;
+#top-bar ul{
+    height: 100%;
+    justify-content: start;
+}
+
+#top-bar li{
+    height: 100%;
+    padding: 0 15px 0 15px;
+    border-right: 1px solid #3A4F50;
+}
+
+#top-bar div{
+    justify-content: end;
+    color: #0EF6CC;
+    height: 100%;
+}
+
+#top-bar div p{
+    padding: 0 10px 0 10px;
 }
 
 #top-bar .flex span{
     width: 1px;
     height: 100%;
     background: #3A4F50;
+}
+
+#top-bar select{
+    background: none;
+    color: #0EF6CC;
+    border: none;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 /* Navbar */
