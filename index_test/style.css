@@ -23,6 +23,14 @@ body{
     width: 100%;
 }
 
+.flex-vertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
 .center{
     justify-content: center!important;
 }
@@ -169,6 +177,47 @@ header{
     font-size: 18px;
     margin-bottom: 12px;
 }
+
+.home-card{
+    margin-top: 260px;
+    z-index: 4;
+    flex-wrap:wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+#home .card{
+    justify-content: center;
+    gap: 10px;
+    z-index: 4;
+    width: 205px;
+    height: 170px;
+    background-color: #3A4F50;
+}
+
+#home .card i{
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.777);
+    padding-bottom: 10px;
+}
+
+#home .card h3{
+    font-size: 18px;
+    font-weight: 500;
+    color: #0EF6CC;
+}
+
+#home .card p{
+    font-size: 14px;
+    color: #fff;
+}
+
+/* About Us */
+
+#aboutus{
+    background-color: #1B2223;
+}
+
 /* Route-Search */
 #route-search{
     position: relative;
