@@ -178,7 +178,7 @@ header{
     margin-bottom: 12px;
 }
 
-.home-card{
+#home-card{
     margin-top: 260px;
     z-index: 4;
     flex-wrap:wrap;
@@ -207,15 +207,42 @@ header{
     color: #0EF6CC;
 }
 
-#home .card p{
+.card p{
     font-size: 14px;
     color: #fff;
 }
 
 /* About Us */
 
-#aboutus{
+#how-works{
     background-color: #1B2223;
+    height: 800px;
+}
+
+#how-works .title{
+    padding-top: 200px;
+    margin-bottom: 90px;
+    color:#0EF6CC;
+    font-weight: 500;
+    justify-content: start;
+    gap: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#how-works .title p{
+    color: #fff;
+}
+
+#how-works .card{
+    width: 360px;
+    height: 390px;
+    background-color: #3A4F50;
+    color: #fff;
+}
+
+#how-works .card h3{
+    color: #0EF6CC;
 }
 
 /* Route-Search */
