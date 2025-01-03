@@ -13,6 +13,7 @@ body{
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
+    background-image: url("../assets/images/counter/counter-banner.jpg");
 }
 /* General */
 
@@ -23,8 +24,35 @@ body{
     width: 100%;
 }
 
+.flex-vertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
 .center{
     justify-content: center!important;
+}
+
+.around{
+    justify-content: space-around;
+}
+
+button{
+    cursor: pointer;
+}
+
+.title{
+    color:#0EF6CC;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+
+.title p{
+    color: #fff;
 }
 
 /* */
@@ -44,29 +72,44 @@ header{
     height: 40px;
     width: 100%;
     border-bottom: solid 1px #3A4F50;
-}
-
-#top-bar div:first-child{
-    height: 100%;
-    width: 100px;
-}
-
-#top-bar div:last-child{
-    color: #0EF6CC;
     font-size: 12px;
-    width: 210px;
-    height: 100%;
-    border-left: solid 1px #3A4F50;
+    font-weight: 300;
 }
 
-#top-bar div:last-child p{
-    margin: 0 5px 0 5px;
+#top-bar ul{
+    height: 100%;
+    justify-content: start;
+}
+
+#top-bar li{
+    height: 100%;
+    padding: 0 15px 0 15px;
+    border-right: 1px solid #3A4F50;
+}
+
+#top-bar div{
+    justify-content: end;
+    color: #0EF6CC;
+    height: 100%;
+}
+
+#top-bar div p{
+    padding: 0 10px 0 10px;
 }
 
 #top-bar .flex span{
     width: 1px;
     height: 100%;
     background: #3A4F50;
+}
+
+#top-bar select{
+    background: none;
+    color: #0EF6CC;
+    border: none;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 /* Navbar */
@@ -90,11 +133,13 @@ header{
     display: flex;
     align-items: center;
 }
+
 .nav-links li a{
     margin-left: 20px;
     color: #3A4F50;
     border-radius: 5px;
     transition: all .3s ease-in-out;
+    padding: 30px 0 30px 0;
 }
 .nav-links li a:hover{
     color: #0EF6CC;
@@ -154,13 +199,141 @@ header{
     font-size: 18px;
     margin-bottom: 12px;
 }
+
+#home-card{
+    margin-top: 260px;
+    z-index: 4;
+    flex-wrap:wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+#home .card{
+    justify-content: center;
+    gap: 10px;
+    z-index: 4;
+    width: 205px;
+    height: 170px;
+    background-color: #3A4F50;
+    border-radius: 3px;
+}
+
+#home .card i{
+    font-size: 40px;
+    color: #1b2223e3;
+    padding-bottom: 10px;
+}
+
+#home .card h3{
+    font-size: 18px;
+    font-weight: 500;
+    color: #0EF6CC;
+}
+
+.card p{
+    font-size: 14px;
+    color: #fff;
+}
+
+#home .card:hover > h3{
+    color: black;
+}
+
+#home .card:hover > p{
+    color: black;
+}
+
+#home .card:hover{
+    background-color: #ff545a;
+}
+
+
+/* How It Works */
+
+#how-works{
+    background-color: #1B2223;
+    height: 800px;
+}
+
+/* .title general kısmında da var */
+#how-works .title{
+    padding-top: 200px;
+    margin-bottom: 90px;
+    justify-content: start;
+    gap: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#how-works .card{
+    justify-content: space-around;
+    width: 360px;
+    height: 390px;
+    background-color: #3A4F50;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    transition: all .3s;
+}
+
+#how-works .card:hover{
+    background-color: #ff545a;
+}
+
+#how-works .card:hover > h3{
+    color: #fff;
+}
+
+#how-works .card:hover > button{
+    background-color: #fff;
+    color: #ff545a;
+}
+
+#how-works .card:hover div > i{
+    color: #ff545a;
+}
+
+#how-works .card h3{
+    color: #0EF6CC;
+}
+
+#how-works .card i{
+    color: #1b2223e3;
+    font-size: 30px;
+}
+
+#how-works .card div:first-child{
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 25px;
+}
+
+#how-works .card button{
+    background: none;
+    border: 1px solid #fff ;
+    border-radius: 3px;
+    padding: 8px 18px 8px 18px;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+#how-works-card{
+    gap: 27px;
+}
+
 /* Route-Search */
 #route-search{
     position: relative;
     border-radius: 3px;
     z-index: 3;
     margin: 90px auto;
-    width: 87%;
+    width: 70%;
     height: 70px;
     background-color: #1B2223;
 }
@@ -171,6 +344,13 @@ header{
 
 #route-left p{
     color: #0EF6CC;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#route-left i{
+    color:#ff545a;
+    font-size: 20px;
 }
 
 .route-input{
@@ -195,4 +375,53 @@ header{
     background: #0EF6CC;
     border: none;
     border-radius: 3px;
+}
+
+#route-btn:hover{
+    cursor: pointer;
+}
+
+.background-transition .flex:first-child{
+    color: #fff;
+    padding: 120px 0 120px 0;
+}
+
+/* about-us */
+
+#about-us{
+    background-color: #1B2223;
+    padding-bottom: 100px;
+}
+
+#about-us .title{
+    padding: 50px 0 100px 0;
+}
+
+#about-us .flex{
+    gap: 20px;
+}
+
+#about-us .card{
+    width: 555px;
+    height: 505px;
+    box-shadow: rgba(71, 71, 71, 0.2) 0px 0px 5px 0px;
+}   
+
+#about-us .card img{
+    width: 555px;
+    height: 250px;
+}
+
+#about-us .card div{
+    color: #0EF6CC;
+    font-size: 16px;
+    margin: 0 20px 50px 20px;
+}  
+
+/* section work-us */
+
+#work-us{
+    height: 400px;
+    padding-top: 100px;
+    background-color: #fff;
 }

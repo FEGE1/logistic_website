@@ -16,17 +16,22 @@
     <!--NAVBAR-->
     <header>
         <div id="top-bar">
+            <ul class="flex">
+                <li>
+                    <select name="language" id="language">
+                        <option value="default">ENG</option>
+                        <option value="Türkçe">TR</option>
+                    </select>
+                </li>
+                <li>
+                    <select name="currency" id="currency">
+                        <option value="USD">USD</option>
+                        <option value="TRY">TRY</option>
+                    </select>
+                </li>
+            </ul>
             <div class="flex">
-                <select name="language" id="language">
-                    <option value="default">ENG</option>
-                    <option value="Türkçe">TR</option>
-                </select>
-                <select name="currency" id="currency">
-                    <option value="USD">USD</option>
-                    <option value="TRY">TRY</option>
-                </select>
-            </div>
-            <div class="flex">
+                <span></span>
                 <p>+1 222 333 444</p>
                 <span></span>
                 <p>+90 222 333 444</p>
@@ -67,37 +72,104 @@
                 <div class="flex route-input">
                     <p>Receiving</p>
                     <input type="text" placeholder="Receiving">
-                    <p>O</p>
+                    <i class="fa-solid fa-location-crosshairs"></i>
                 </div>
                 <div class="flex route-input">
                     <p>Destination</p>
                     <input type="text" placeholder="Destination">
-                    <p>O</p>
-                </div>
-                <div class="flex route-input">
-                    <p>Deneme</p>
-                    <input type="text" placeholder="Deneme">
-                    <p>O</p>
+                    <i class="fa-solid fa-location-dot"></i>
                 </div>
             </div>
             <button id="route-btn">Search</button>
-
+        </div>
+        <div class="flex" id="home-card">
+            <div class="flex-vertical card">
+                <i class="fa-regular fa-building"></i>
+                <h3>Festival Tours</h3>
+                <p>150 listings</p>
+            </div>
+            <div class="flex-vertical card">
+                <i class="fa-solid fa-city"></i>
+                <h3>Multiple Stopovers</h3>
+                <p>214 listings</p>
+            </div>
+            <div class="flex-vertical card">
+                <i class="fa-solid fa-city"></i>
+                <h3>Building Materials</h3>
+                <p>185 listings</p>
+            </div>
+            <div class="flex-vertical card">
+                <i class="fa-solid fa-pills"></i>
+                <h3>Pharmaceutical</h3>
+                <p>200 listings</p>
+            </div>
+            <div class="flex-vertical card">
+                <i class="fa-solid fa-car-side"></i>
+                <h3>Small Transports</h3>
+                <p>120 listings</p>
+            </div>
         </div>
         <span style="background-color:rgba(49, 54, 63, 0.57);width: 100%;height: 100%;position: absolute;top:0;z-index: 1;"></span>
     </section>
-    <section id="aboutus" class="blog">
-        <div class="container">
-            <div class="section-header">
-                <h2>Hakkimizda</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione corrupti quaerat, voluptatibus, iusto molestiae perferendis possimus impedit soluta repellendus sint porro sapiente explicabo accusamus tempore ducimus obcaecati dolores animi eum?</p>
-            </div>   
+    <section id="how-works">
+        <div class="title">
+            <h2>HOW IT WORKS</h2>
+            <p>Learn More about how our website works</p>
         </div>
-    
+        <div class="flex center" id="how-works-card">
+            <div class="flex-vertical card">
+                <div>
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3>Festival Tours</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur animi modi ducimus voluptas culpa provident enim</p>
+                <button>Read More</button>
+            </div>
+            <div class="flex-vertical card">
+                <div>
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <h3>Festival Tours</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur animi modi ducimus voluptas culpa provident enim</p>
+                <button>Read More</button>
+            </div>
+            <div class="flex-vertical card">
+                <div>
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Festival Tours</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur animi modi ducimus voluptas culpa provident enim</p>
+                <button>Read More</button>
+            </div>
+        </div>
     </section>
+    <section id="about-us">
+        <div class="title">
+            <h2>ABOUT US</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        </div>
+        <div class="flex center">
+            <div class="flex-vertical card">
+                <img src="../assets/images/blog/cargo.png" alt="">
+                <div>
+                    <h3>Lorem ipsum dolor sit amet.</h3>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur de adipisicing elit, sed do eiusmod tempore incididunt ut labore et dolore magna. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, placeat cum dicta veritatis tempora eveniet saepe ullam soluta totam consequuntur dolores porro dolorum tenetur explicabo! Culpa hic animi porro iste.</p>
+                </div>
+            </div>
+            <div class="flex-vertical card">
+                <img src="../assets/images/blog/cargo3.jpeg" alt="">
+                <div>
+                    <h3>Lorem ipsum dolor sit amet.</h3>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur de adipisicing elit, sed do eiusmod tempore incididunt ut labore et dolore magna. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, placeat cum dicta veritatis tempora eveniet saepe ullam soluta totam consequuntur dolores porro dolorum tenetur explicabo! Culpa hic animi porro iste.</p>
+                </div>
+            </div>
+        </div>
+    </section> 
+    <section id="work-us">
         
-    </div>
-    
-    <div class="merve" style="background-color: blue;"></div>
-
+    </section>
+    <script src="https://kit.fontawesome.com/44f61e66cc.js" crossorigin="anonymous"></script>
 </body>
 </html>
