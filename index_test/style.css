@@ -13,6 +13,7 @@ body{
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
+    background-image: url("../assets/images/counter/counter-banner.jpg");
 }
 /* General */
 
@@ -35,8 +36,23 @@ body{
     justify-content: center!important;
 }
 
+.around{
+    justify-content: space-around;
+}
+
 button{
     cursor: pointer;
+}
+
+.title{
+    color:#0EF6CC;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+
+.title p{
+    color: #fff;
 }
 
 /* */
@@ -232,26 +248,21 @@ header{
 }
 
 
-/* About Us */
+/* How It Works */
 
 #how-works{
     background-color: #1B2223;
     height: 800px;
 }
 
+/* .title general kısmında da var */
 #how-works .title{
     padding-top: 200px;
     margin-bottom: 90px;
-    color:#0EF6CC;
-    font-weight: 500;
     justify-content: start;
     gap: 20px;
     width: 100%;
     text-align: center;
-}
-
-#how-works .title p{
-    color: #fff;
 }
 
 #how-works .card{
@@ -262,6 +273,7 @@ header{
     color: #fff;
     border-radius: 3px;
     text-align: center;
+    transition: all .3s;
 }
 
 #how-works .card:hover{
@@ -298,6 +310,7 @@ header{
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    margin-top: 25px;
 }
 
 #how-works .card button{
@@ -307,6 +320,7 @@ header{
     padding: 8px 18px 8px 18px;
     color: #fff;
     font-size: 12px;
+    margin-bottom: 20px;
 }
 
 #how-works-card{
@@ -365,4 +379,49 @@ header{
 
 #route-btn:hover{
     cursor: pointer;
+}
+
+.background-transition .flex:first-child{
+    color: #fff;
+    padding: 120px 0 120px 0;
+}
+
+/* about-us */
+
+#about-us{
+    background-color: #1B2223;
+    padding-bottom: 100px;
+}
+
+#about-us .title{
+    padding: 50px 0 100px 0;
+}
+
+#about-us .flex{
+    gap: 20px;
+}
+
+#about-us .card{
+    width: 555px;
+    height: 505px;
+    box-shadow: rgba(71, 71, 71, 0.2) 0px 0px 5px 0px;
+}   
+
+#about-us .card img{
+    width: 555px;
+    height: 250px;
+}
+
+#about-us .card div{
+    color: #0EF6CC;
+    font-size: 16px;
+    margin: 0 20px 50px 20px;
+}  
+
+/* section work-us */
+
+#work-us{
+    height: 400px;
+    padding-top: 100px;
+    background-color: #fff;
 }
