@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+     <!--Map Script-->
+     <script type="module" src="{% static 'js/google_maps.js' %}"></script>
 </head>
 <body>
     <!--NAVBAR-->
@@ -57,66 +59,15 @@
             </ul>
         </div>
     </header>
-    {% block bodyBlock %}
+    {% block body %}
     
     {% endblock %}
-    <!--FOOTER STARTS-->
-    <div>
-    <footer id="footer"  class="footer">
-        <div class="container">
-            <div class="footer-menu">
-                <div class="row">
-                    <div class="col-sm-3">
-                            <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html">
-                                <span style="color: #0EF6CC;">Logo</span>
-                                <span style="color: #ff545a;">Logo</span>
-                        </div><!--/.navbar-header-->
-                    </div>
-                    <div class="col-sm-9">
-                        <ul class="footer-menu-item">
-                            <li class="scroll"><a href="#works">how it works</a></li>
-                            
-                            <li class="scroll"><a href="#reviews">review</a></li>
-                            <li class="scroll"><a href="#blog">About Us</a></li>
-                            <li class="scroll"><a href="#contact">contact</a></li>
-                            <li class=" scroll"><a href="#career">Career</a></li>
-                            <li class=" scroll"><a href="#contact">my account</a></li>
-                        </ul><!--/.nav -->
-                    </div>
-                </div>
-            </div>
-            <div class="hm-footer-copyright">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <p>
-                            &copy;copyright. designed and developed by FEGE & Merve</a>
-                        </p><!--/p-->
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="footer-social">
-                            <span><i class="fa fa-phone"> +1 (222) 333 4444</i></span>
-                            <span><i class="fa fa-phone"> +90 (222) 333 4444</i></span>
-                            <a href="#"><i class="fa fa-facebook"></i></a>	
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div><!--/.hm-footer-copyright-->
-        </div><!--/.container-->
-
-        <div id="scroll-Top">
-            <div class="return-to-top">
-                <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
-            </div>
-            
-        </div><!--/.scroll-Top-->
-        
-    </footer><!--/.footer-->
-    </div>
-    <!--FOOTER END-->
     <script src="https://kit.fontawesome.com/44f61e66cc.js" crossorigin="anonymous"></script>
+    <!--Custom JS-->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- Map script -->
+    <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyCylRnlEZdmLKjm1NzXZ5nO4RzvyNifhpk", v: "beta"});</script>
+    {{ map_data|json_script:"map-data" }}
 </body>
 </html>
