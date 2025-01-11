@@ -390,7 +390,6 @@ header{
 
 #about-us{
     background-color: #1B2223;
-    padding-bottom: 100px;
 }
 
 #about-us .title{
@@ -399,6 +398,7 @@ header{
 
 #about-us .flex{
     gap: 20px;
+    padding-bottom: 40px;
 }
 
 #about-us .card{
@@ -422,8 +422,7 @@ header{
 
 #work-us {
     height: 100%;
-    padding-top: 0; /* Üst boşluğu sıfırla */
-    background-color: #fff;
+    background-color: #f8fafb;
     display: flex; /* Flexbox düzeni */
     flex-direction: column; /* Elemanları dikey hizala */
     justify-content: center; /* Dikey ortala */
@@ -432,8 +431,8 @@ header{
 }
 
 .subscription{
-    background: #f8fafb;
-    padding:150px 0;
+    background: #fff;
+    padding:180px 0;
 }
 /*subscribe-title*/
 .subscribe-title {
@@ -523,7 +522,10 @@ header{
 /*appsLand-btn*/
 
 /*FOOTER*/
-
+#footer{
+    background-color: #1B2223;
+    padding: 0 10%;
+}
 #footer .row {
     display: flex; /* Flexbox etkinleştirme */
     justify-content: space-between; /* Elemanları yatayda yay */
