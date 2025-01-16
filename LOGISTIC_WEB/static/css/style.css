@@ -14,7 +14,6 @@ body{
     font-weight: 500;
     font-style: normal;
     background-color: #333;
-    height: 100vh;
 }
 /* General */
 
@@ -23,6 +22,7 @@ body{
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    text-align: center;
 }
 
 .flex-vertical{
@@ -647,12 +647,19 @@ header{
 
 /*ORDER FORM STARTS*/
 .form-container {
-    max-width: 600px;
     padding: 30px;
+    width: 50%;
     background: #fff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     text-align: center;
+}
+
+#order-form .flex{
+    padding: 0!important;
+    height: 100px!important;
+    justify-content: space-between!important;
+    gap: 5%!important;
 }
 
 .title {
@@ -665,9 +672,8 @@ header{
 
 .form {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
     align-items: center;
+    width: 100%;
 }
 
 .form-group {
@@ -690,7 +696,6 @@ input, select, textarea {
     border-radius: 6px;
     font-size: 14px;
     width: 100%;
-    max-width: 400px;
     box-sizing: border-box;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -730,7 +735,6 @@ button:active {
 p {
     font-size: 14px;
     color: #666;
-    margin-bottom: 10px;
     max-width: 400px;
     text-align: center;
 }
@@ -754,7 +758,7 @@ p {
 
 .map-div{
     height: 100%;
-    width: 100%;
+    width: 50%;
 }
 
 /* MAP SEARCH */
@@ -804,7 +808,7 @@ gmp-place-autocomplete {
     justify-content: center;
     align-items: center;
     gap: 3%;
-    height: 840px;
+    height: 85vh;
     padding: 30px 5%;
 }
 /* ORDER-PAGE END */
