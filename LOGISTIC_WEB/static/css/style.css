@@ -22,7 +22,6 @@ body{
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    text-align: center;
 }
 
 .flex-vertical{
@@ -683,7 +682,7 @@ header{
     align-items: center;
 }
 
-label {
+#order-form label {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 8px;
@@ -706,12 +705,12 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 8px rgba(14, 246, 204, 0.4);
 }
 
-textarea {
+#order-form textarea {
     resize: none;
     height: 120px;
 }
 
-button {
+#order-form button {
     padding: 12px 24px;
     background-color: #0EF6CC;
     color: white;
@@ -723,16 +722,16 @@ button {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+#order-form button:hover {
     background-color: #0bc8a8;
     transform: scale(1.05);
 }
 
-button:active {
+#order-form button:active {
     background-color: #08a085;
 }
 
-p {
+#order-form p {
     font-size: 14px;
     color: #666;
     max-width: 400px;
