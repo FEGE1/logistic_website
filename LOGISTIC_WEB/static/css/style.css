@@ -13,7 +13,8 @@ body{
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
-    background-image: url("../../media/images/counter/counter-banner.jpg");
+    background-color: #333;
+    height: 100vh;
 }
 /* General */
 
@@ -746,9 +747,16 @@ p {
 
 /* MAP START */
 #map {
-    height: 700px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
 }
+
+.map-div{
+    height: 100%;
+    width: 100%;
+}
+
 /* MAP SEARCH */
 #place-autocomplete-card {
     background-color: #fff;
@@ -790,3 +798,13 @@ gmp-place-autocomplete {
     color: whitesmoke;    
 }
 /* MAP END */
+
+/* ORDER-PAGE START */
+#order-page .flex{
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    height: 840px;
+    padding: 30px 5%;
+}
+/* ORDER-PAGE END */
