@@ -16,12 +16,12 @@
                 <div id="route-left" class="flex">
                     <div class="flex route-input">
                         <p>Receiving</p>
-                        <input type="text" placeholder="Receiving">
+                        <input class="autocomplete" type="text" placeholder="Receiving">
                         <i class="fa-solid fa-location-crosshairs"></i>
                     </div>
                     <div class="flex route-input">
                         <p>Destination</p>
-                        <input type="text" placeholder="Destination">
+                        <input class="autocomplete" type="text" placeholder="Destination">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
                 </div>
@@ -207,4 +207,11 @@
         </footer><!--/.footer-->
         </div>
         <!--FOOTER END-->
+
+    <!--Autocomplete JS-->
+    <script src="{% static 'js/google_autocomplete.js' %}"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylRnlEZdmLKjm1NzXZ5nO4RzvyNifhpk&libraries=places&callback=initAutocomplete">
+    </script>
+    
     {% endblock %}

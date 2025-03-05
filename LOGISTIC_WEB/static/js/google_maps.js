@@ -1,7 +1,4 @@
 // Insert map datas from django
-const location_data = JSON.parse(document.getElementById('map-data').textContent);
-const location_lat = location_data[0]['lat'];
-const location_lng = location_data[0]['lng'];
 var start_btn = document.getElementById("start-btn");
 var end_btn = document.getElementById("end-btn");
 var reset_btn = document.getElementById("reset-btn");
@@ -88,6 +85,9 @@ async function initMap() {
     updateInfoWindow(content, place.location);
     marker.position = place.location;
   });
+
+  // Autocomplete
+  initAutocomplete();
 }
 
 // Helper function to create an info window.
@@ -142,28 +142,14 @@ function btnReset(){
   end_btn.innerHTML="End";
   search_end_address="";
 }
-/* ********* Simple Render for Selected Location *********
-  // The location of Selected on map.py
-  const position = { lat: location_lat, lng: location_lng };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 15,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-  });
-
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: "Selected_location",
-  });
-  
-initMap();
-  
-********* Simple Render for Selected Location ********* */
+// Autocomplete
+function initAutocomplete() {
+	const input = document.getElementById("autocomplete");
+	const options = {
+	  componentRestrictions: { country: "tr" },
+	  fields: ["address_components", "geometry", "icon", "name"],
+	  strictBounds: false,
+	};
+	const autocomplete = new google.maps.places.Autocomplete(input, options);
+  }
