@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistic Web</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/autocomplete.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -35,12 +36,12 @@
                 <span></span>
                 <p>+1 222 333 444</p>
                 <span></span>
-                <p>+90 222 333 444</p>
+                <p>+90 537 732 07 95</p>
             </div>
         </div>
         <div class="navbar">
             <div id="logo">
-                <h2> <a href="LOGO"></a><span style="color:#0EF6CC;">Logo</span><span style="color:#ff545a;">Logo</span></h2>
+                <h2> <a href="{%  url 'index' %}"><span style="color:#0EF6CC;">Logo</span><span style="color:#ff545a;">Logo</span></a></h2>
             </div>
             <ul class="nav-links">
                 <li><a href="#Home"><span style="color:#ff545a;">HOME</span></a></li>
@@ -57,66 +58,9 @@
             </ul>
         </div>
     </header>
-    {% block bodyBlock %}
+    {% block body %}
     
     {% endblock %}
-    <!--FOOTER STARTS-->
-    <div>
-    <footer id="footer"  class="footer">
-        <div class="container">
-            <div class="footer-menu">
-                <div class="row">
-                    <div class="col-sm-3">
-                            <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html">
-                                <span style="color: #0EF6CC;">Logo</span>
-                                <span style="color: #ff545a;">Logo</span>
-                        </div><!--/.navbar-header-->
-                    </div>
-                    <div class="col-sm-9">
-                        <ul class="footer-menu-item">
-                            <li class="scroll"><a href="#works">how it works</a></li>
-                            
-                            <li class="scroll"><a href="#reviews">review</a></li>
-                            <li class="scroll"><a href="#blog">About Us</a></li>
-                            <li class="scroll"><a href="#contact">contact</a></li>
-                            <li class=" scroll"><a href="#career">Career</a></li>
-                            <li class=" scroll"><a href="#contact">my account</a></li>
-                        </ul><!--/.nav -->
-                    </div>
-                </div>
-            </div>
-            <div class="hm-footer-copyright">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <p>
-                            &copy;copyright. designed and developed by FEGE & Merve</a>
-                        </p><!--/p-->
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="footer-social">
-                            <span><i class="fa fa-phone"> +1 (222) 333 4444</i></span>
-                            <span><i class="fa fa-phone"> +90 (222) 333 4444</i></span>
-                            <a href="#"><i class="fa fa-facebook"></i></a>	
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div><!--/.hm-footer-copyright-->
-        </div><!--/.container-->
-
-        <div id="scroll-Top">
-            <div class="return-to-top">
-                <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
-            </div>
-            
-        </div><!--/.scroll-Top-->
-        
-    </footer><!--/.footer-->
-    </div>
-    <!--FOOTER END-->
     <script src="https://kit.fontawesome.com/44f61e66cc.js" crossorigin="anonymous"></script>
 </body>
 </html>

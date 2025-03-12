@@ -1,6 +1,6 @@
 {% extends "included/layout.html" %}
 {% load static %}
-    {% block bodyBlock %}
+    {% block body %}
         <!--ANASAYFA-->
         <section id="home">
             <div class="flex center">
@@ -16,16 +16,16 @@
                 <div id="route-left" class="flex">
                     <div class="flex route-input">
                         <p>Receiving</p>
-                        <input type="text" placeholder="Receiving">
+                        <input class="autocomplete" type="text" placeholder="Receiving">
                         <i class="fa-solid fa-location-crosshairs"></i>
                     </div>
                     <div class="flex route-input">
                         <p>Destination</p>
-                        <input type="text" placeholder="Destination">
+                        <input class="autocomplete" type="text" placeholder="Destination">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
                 </div>
-                <button id="route-btn">Search</button>
+                <a href="{%  url 'Map' %}"><button id="route-btn">Search</button></a>
             </div>
             <div class="flex" id="home-card">
                 <div class="flex-vertical card">
@@ -150,4 +150,68 @@
             </div>
         </section>
             <!--WORK-US END-->
+        <!--FOOTER STARTS-->
+    <div>
+        <footer id="footer"  class="footer">
+            <div class="container">
+                <div class="footer-menu">
+                    <div class="row">
+                        <div class="col-sm-3">
+                                <div class="navbar-header">
+                                <a class="navbar-brand" href="index.html">
+                                    <span style="color: #0EF6CC;">Logo</span>
+                                    <span style="color: #ff545a;">Logo</span>
+                            </div><!--/.navbar-header-->
+                        </div>
+                        <div class="col-sm-9">
+                            <ul class="footer-menu-item">
+                                <li class="scroll"><a href="#works">how it works</a></li>
+                                
+                                <li class="scroll"><a href="#reviews">review</a></li>
+                                <li class="scroll"><a href="#blog">About Us</a></li>
+                                <li class="scroll"><a href="#contact">contact</a></li>
+                                <li class=" scroll"><a href="#career">Career</a></li>
+                                <li class=" scroll"><a href="#contact">my account</a></li>
+                            </ul><!--/.nav -->
+                        </div>
+                    </div>
+                </div>
+                <div class="hm-footer-copyright">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <p>
+                                &copy;copyright. designed and developed by FEGE & Merve</a>
+                            </p><!--/p-->
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="footer-social">
+                                <span><i class="fa fa-phone"> +1 (222) 333 4444</i></span>
+                                <span><i class="fa fa-phone"> +90 (222) 333 4444</i></span>
+                                <a href="#"><i class="fa fa-facebook"></i></a>	
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div><!--/.hm-footer-copyright-->
+            </div><!--/.container-->
+    
+            <div id="scroll-Top">
+                <div class="return-to-top">
+                    <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+                </div>
+                
+            </div><!--/.scroll-Top-->
+            
+        </footer><!--/.footer-->
+        </div>
+        <!--FOOTER END-->
+
+    <!--Autocomplete JS-->
+    <script src="{% static 'js/google_autocomplete.js' %}"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylRnlEZdmLKjm1NzXZ5nO4RzvyNifhpk&libraries=places&callback=initAutocomplete">
+    </script>
+    
     {% endblock %}
