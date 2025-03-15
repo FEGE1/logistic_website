@@ -12,21 +12,26 @@
             </div>
         
             <!--SEARCHBARLAR-->
-            <div id="route-search" class="flex">
-                <div id="route-left" class="flex">
-                    <div class="flex route-input">
-                        <p>Receiving</p>
-                        <input class="autocomplete" type="text" placeholder="Receiving">
-                        <i class="fa-solid fa-location-crosshairs"></i>
+            <!--SEARCHBARLAR-->
+            <form method="post">
+                {% csrf_token %}
+                <div id="route-search" class="flex">
+                    <div id="route-left" class="flex">
+                        <div class="flex route-input">
+                            <p>Receiving</p>
+                            <input class="autocomplete" name="receiving" type="text" placeholder="Receiving" required>
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </div>
+                        <div class="flex route-input">
+                            <p>Destination</p>
+                            <input class="autocomplete" name="destination" type="text" placeholder="Destination" required>
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
                     </div>
-                    <div class="flex route-input">
-                        <p>Destination</p>
-                        <input class="autocomplete" type="text" placeholder="Destination">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
+                    <button id="route-btn" type="submit" >Search</button>
                 </div>
-                <a href="{%  url 'Map' %}"><button id="route-btn">Search</button></a>
-            </div>
+            </form>
+
             <div class="flex" id="home-card">
                 <div class="flex-vertical card">
                     <i class="fa-regular fa-building"></i>
