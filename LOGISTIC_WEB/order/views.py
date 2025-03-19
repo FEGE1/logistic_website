@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from order.forms import Order_form,Receiving_location_form,Destination_location_form,Vehicle_form,Cargo_form,Bill_form
+from order import map
 
 def Form_view(request):
     if request.method=='POST':
@@ -39,3 +40,8 @@ def Form_view(request):
         f = Bill_form()
     
     return render(request,'order/form.html',{'Order_form':a,'Receiving_location_form':b,'Destination_location_form':c,'Vehicle_form':d,'Cargo_form':e,'Bill_form':f})
+
+def Form_Create(request):
+    receiving = request.session.pop('receiving',' ')
+    destination = request.session.pop('destination',' ')
+    return render(request,'order/create_order.html',{'receiving':receiving, 'destination':destination})

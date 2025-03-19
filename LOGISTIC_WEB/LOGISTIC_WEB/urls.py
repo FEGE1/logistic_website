@@ -26,5 +26,4 @@ urlpatterns = [
     path('',views.IndexView,name='index'),
     path('login/',views.LoginView,name='login'),
     path('order/',include('order.urls')),
-    path('map/',views.MapView,name='Map'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

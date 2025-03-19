@@ -31,7 +31,7 @@ class Vehicle(models.Model):
     storage_height = models.IntegerField() # santimetre cinsinden
     storage_width = models.IntegerField()
     storage_length = models.IntegerField()
-
+    
 class Cargo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='Cargo')
     type = models.CharField(max_length=30) # elma,armut,tabak taşınacak maddenin ismi /// opsiyonel

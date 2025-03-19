@@ -1,19 +1,19 @@
 // Insert map datas from django
-var start_btn = document.getElementById("start-btn");
-var end_btn = document.getElementById("end-btn");
-var reset_btn = document.getElementById("reset-btn");
+var receiving_address = document.getElementsByName("company-name")[0];
+var destination_address = document.getElementsByName("address")[0];
 var search_address;
 var search_start_address;
 var search_end_address;
+
+if(receiving_address && destination_address){
+  search_start_address = receiving_address['defaultValue'];
+  search_end_address = destination_address['defaultValue'];
+}
 
 // Initialize and add the map
 let map;
 let marker;
 let infoWindow;
-
-start_btn.addEventListener("click", function(){setSelectedLocationAddress("start");},false);//
-end_btn.addEventListener("click", function(){setSelectedLocationAddress("stop");},false);//
-reset_btn.addEventListener("click",btnReset);
 
 async function initMap() {
   // Request needed libraries.
@@ -40,65 +40,32 @@ async function initMap() {
     calculateAndDisplayRoute(directionsService, directionsRenderer);//
   };//
 
-  document.getElementById("confirm-btn").addEventListener("click", onChangeHandler);//
-
-  //@ts-ignore
-  const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
-
-  //@ts-ignore
-  placeAutocomplete.id = "place-autocomplete-input";
-
-  const card = document.getElementById("place-autocomplete-card");
-
-  //@ts-ignore
-  card.appendChild(placeAutocomplete);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
   // Create the marker and infowindow
   marker = new google.maps.marker.AdvancedMarkerElement({
     map,
   });
-  infoWindow = new google.maps.InfoWindow({});
-  // Add the gmp-placeselect listener, and display the results on the map.
-  //@ts-ignore
-  placeAutocomplete.addEventListener("gmp-placeselect", async ({ place }) => {
-    await place.fetchFields({
-      fields: ["displayName", "formattedAddress", "location"],
-    });
-    search_address = place.formattedAddress;
-    // If the place has a geometry, then present it on a map.
-    if (place.viewport) {
-      map.fitBounds(place.viewport);
-    } else {
-      map.setCenter(place.location);           ////////////////////
-      map.setZoom(17);
-    }
 
-    let content =
-      '<div id="infowindow-content">' +
-      '<span id="place-displayname" class="title">' +
-      place.displayName +
-      "</span><br />" +
-      '<span id="place-address">' +
-      place.formattedAddress +
-      "</span>" +
-      "</div>";
-    updateInfoWindow(content, place.location);
-    marker.position = place.location;
-  });
+  if(search_start_address && search_end_address){
+      onChangeHandler();
+  }
+
+  function initAutocomplete() {
+    const input = document.getElementById("autocomplete");
+    const options = {
+      componentRestrictions: { country: "tr" },
+      fields: ["address_components", "geometry", "icon", "name","formatted_address"],
+      strictBounds: false,
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.addListener("place_changed", function(){
+      const place = autocomplete.getPlace();
+      search_end_address = place.formatted_address;
+      onChangeHandler();
+    })
+    }
 
   // Autocomplete
   initAutocomplete();
-}
-
-// Helper function to create an info window.
-function updateInfoWindow(content, center) {
-  infoWindow.setContent(content);
-  infoWindow.setPosition(center);
-  infoWindow.open({
-    map,
-    anchor: marker,
-    shouldFocus: false,
-  });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {//
@@ -121,28 +88,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {//
 
 initMap();
 
-function setSelectedLocationAddress(x){
-  if(x=='start'){
-    search_start_address=search_address;
-    start_btn.innerHTML=search_address;
-    start_btn.style.backgroundColor="gray";
-  }
-  else{
-    search_end_address=search_address;
-    end_btn.innerHTML=search_address;
-    end_btn.style.backgroundColor="gray";
-  }
-}
-
-function btnReset(){
-  start_btn.style="background-color=gainsboro;";
-  start_btn.innerHTML="Start";
-  search_start_address="";
-  end_btn.style="background-color=gainsboro;";
-  end_btn.innerHTML="End";
-  search_end_address="";
-}
-
 // Autocomplete
 function initAutocomplete() {
 	const input = document.getElementById("autocomplete");
@@ -152,4 +97,8 @@ function initAutocomplete() {
 	  strictBounds: false,
 	};
 	const autocomplete = new google.maps.places.Autocomplete(input, options);
+  autocomplete.addListener("place_changed", function(){
+    search_end_address = this.value;
+    onChangeHandler();
+  })
   }
