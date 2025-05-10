@@ -6,7 +6,7 @@ class Order(models.Model):
     order_code = models.CharField(max_length=10, default=uuid.uuid4, unique=True, editable=False)
     customer = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     status = models.CharField(max_length=30) # Sipariş aktif,pasif,tamamlanmış,iptal...
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits= 12, decimal_places= 2)
     creation_date = models.DateTimeField(default=timezone.now)
 
 class Receiving_location(models.Model):
@@ -31,7 +31,7 @@ class Vehicle(models.Model):
     storage_height = models.IntegerField() # santimetre cinsinden
     storage_width = models.IntegerField()
     storage_length = models.IntegerField()
-
+    
 class Cargo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='Cargo')
     type = models.CharField(max_length=30) # elma,armut,tabak taşınacak maddenin ismi /// opsiyonel
