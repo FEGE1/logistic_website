@@ -1,13 +1,12 @@
-// Insert map datas from django
-var receiving_address = document.getElementsByName("company-name")[0];
-var destination_address = document.getElementsByName("address")[0];
+var receiving_address = receiving;
+var destination_address = destination;
 var search_address;
 var search_start_address;
 var search_end_address;
 
 if(receiving_address && destination_address){
-  search_start_address = receiving_address['defaultValue'];
-  search_end_address = destination_address['defaultValue'];
+  search_start_address = receiving_address;
+  search_end_address = destination_address;
 }
 
 // Initialize and add the map
@@ -50,7 +49,7 @@ async function initMap() {
   }
 
   function initAutocomplete() {
-    const input = document.getElementById("autocomplete");
+    const input = document.getElementsByClassName("autocomplete")[0];
     const options = {
       componentRestrictions: { country: "tr" },
       fields: ["address_components", "geometry", "icon", "name","formatted_address"],
@@ -59,7 +58,13 @@ async function initMap() {
     const autocomplete = new google.maps.places.Autocomplete(input, options);
     autocomplete.addListener("place_changed", function(){
       const place = autocomplete.getPlace();
-      search_end_address = place.formatted_address;
+      if(input['id']=="receiving-address"){
+        search_start_address = place.formatted_address;
+      }
+      else{
+        search_end_address = place.formatted_address;
+      }
+      
       onChangeHandler();
     })
     }

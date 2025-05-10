@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Sipariş Adımı: {{ wizard.steps.step1 }} / {{ wizard.steps.count }} </h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ wizard.management_form }}
+    
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                {{ form.as_p }}
+            {% endfor %}
+        {% else %}
+            {{ wizard.form.as_p }}
+        {% endif %}
+    
+        <div>
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Geri</button>
+            {% endif %}
+            <button type="submit">İleri</button>    
+        </div>
+    </form>
+    
+</body>
+</html>
