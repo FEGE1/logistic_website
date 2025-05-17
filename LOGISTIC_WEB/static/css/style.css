@@ -817,3 +817,77 @@ gmp-place-autocomplete {
     height: 300px;
     background-color: red;
 }
+
+/* Form-Wizard Start */
+
+section#form-wizard form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: sans-serif;
+}
+
+section#form-wizard form p {
+    margin-bottom: 20px;
+}
+
+section#form-wizard form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+section#form-wizard form input[type="text"],
+section#form-wizard form input[type="date"],
+section#form-wizard form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+section#form-wizard form input[type="text"]:focus,
+section#form-wizard form input[type="date"]:focus,
+section#form-wizard form textarea:focus {
+    border-color: #0066cc;
+    outline: none;
+}
+
+section#form-wizard form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Butonların sağ tarafa yaslanması */
+section#form-wizard form > div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* İleri ve geri arasında boşluk bırakmak için */
+}
+
+section#form-wizard form button[type="submit"],
+section#form-wizard form button[type="button"] {
+    padding: 10px 24px;
+    background-color: #0066cc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+section#form-wizard form button[type="submit"]:hover,
+section#form-wizard form button[type="button"]:hover {
+    background-color: #004999;
+}
+
+/* Form-Wizard End */

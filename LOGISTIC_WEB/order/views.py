@@ -7,24 +7,11 @@ from formtools.wizard.views import SessionWizardView
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-def Form_Create(request):
-    receiving = request.session.pop('receiving',' ')
-    destination = request.session.pop('destination',' ')
-    order_code = request.session.pop('order_code',' ')
-
-    context = {
-        'receiving': receiving,
-        'destination': destination,
-        'order_code': order_code
-    }
-    #order code ile siparişin içinden receiving ve destinationları alıp js e atabilirim (refresh attığımda harita kaybolmasın diye)(indexteyken receiving ve destinationı kaydetmek lazım)
-    return render(request,'order/create_order.html', context=context)
-
 class OrderWizard(SessionWizardView):
     
     form_list = [ReceivingLocationForm, DestinationLocationForm, VehicleForm,CargoForm]
     
-    template_name = "order/form_wizard.html"
+    template_name = "order/create_order.html"
 
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
 
@@ -47,13 +34,6 @@ class OrderWizard(SessionWizardView):
         if step == '1':  # second form (DestinationLocationForm)
             initial['address'] = self.request.session.get('destination', '')
         return initial
-    
-    # Non-validation for go back in forms
-    def post(self, *args, **kwargs):  # ← BURAYA
-        if 'wizard_goto_step' in self.request.POST:
-            self.storage.current_step = self.request.POST['wizard_goto_step']
-            return self.render(self.get_form())
-        return super().post(*args, **kwargs)
     
     def done(self, form_list, **kwargs):
 

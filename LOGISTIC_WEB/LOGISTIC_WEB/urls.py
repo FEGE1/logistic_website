@@ -24,6 +24,6 @@ from django.conf.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.IndexView,name='index'),
-    path('login/',views.LoginView,name='login'),
+    path('user/',include('user.urls')),
     path('order/',include('order.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

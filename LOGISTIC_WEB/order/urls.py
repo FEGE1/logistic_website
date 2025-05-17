@@ -9,8 +9,9 @@ from django.core.files.storage import FileSystemStorage
 
 file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
 
+app_name = "order"
+
 urlpatterns = [
-    path('create/',views.Form_Create,name='form_create'),
     path('create-order', views.OrderWizard.as_view(form_list= [ReceivingLocationForm, DestinationLocationForm, VehicleForm, CargoForm],
                                                    file_storage= file_storage),
                                                    name= 'create-order'),

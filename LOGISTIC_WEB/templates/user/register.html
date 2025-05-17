@@ -1,0 +1,15 @@
+{% extends "included/layout.html" %}
+{% load static %}
+{% block body %}
+{% if user.is_authenticated %}
+    <h1>Thank you for registering!</h1>
+{% else %}
+    <section id="form-wizard">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{RegisterForm.as_p}}
+            <input type="submit" name="" value="Register">
+        </form>
+    </section>
+{% endif %}
+{% endblock body %}

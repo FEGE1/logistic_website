@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'order',
     'main',
     'formtools',
+    'user'
 ]
 
 MIDDLEWARE = [
