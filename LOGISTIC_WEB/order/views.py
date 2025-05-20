@@ -9,7 +9,7 @@ from django.conf import settings
 
 class OrderWizard(SessionWizardView):
     
-    form_list = [ReceivingLocationForm, DestinationLocationForm, VehicleForm,CargoForm]
+    form_list = [ReceivingLocationForm, DestinationLocationForm, CargoForm]
     
     template_name = "order/create_order.html"
 
@@ -59,12 +59,17 @@ class OrderWizard(SessionWizardView):
 
         Vehicle.objects.create(
             order = order,
-            **form_data[2]
+            type = "truck",
+            price_km = 2,
+            max_weight = 20000,
+            storage_height = 2000,
+            storage_width = 1500,
+            storage_length = 27500,
         )
 
         Cargo.objects.create(
             order = order,
-            **form_data[3]
+            **form_data[2]
         )
 
         Bill.objects.create(
@@ -77,4 +82,4 @@ class OrderWizard(SessionWizardView):
         satis_vergisi_kimligi="1234567890"
         )
 
-        return redirect('order_success')
+        return redirect('order:order_success')

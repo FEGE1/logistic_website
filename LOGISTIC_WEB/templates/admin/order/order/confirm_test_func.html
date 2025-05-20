@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+  <h1>testFunc() Fonksiyonunu Çalıştır</h1>
+  <p>Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Evet, çalıştır!" class="default">
+    <a href="{% url 'admin:order_order_changelist' %}" class="button cancel-link">İptal</a>
+  </form>
+{% endblock %}

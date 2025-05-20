@@ -12,7 +12,7 @@ file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
 app_name = "order"
 
 urlpatterns = [
-    path('create-order', views.OrderWizard.as_view(form_list= [ReceivingLocationForm, DestinationLocationForm, VehicleForm, CargoForm],
+    path('create-order', views.OrderWizard.as_view(form_list= [ReceivingLocationForm, DestinationLocationForm, CargoForm],
                                                    file_storage= file_storage),
                                                    name= 'create-order'),
 
