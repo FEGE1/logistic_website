@@ -1,6 +1,6 @@
 from django.urls import path
 from order import views
-from order.forms import ReceivingLocationForm, DestinationLocationForm, VehicleForm, CargoForm
+from order.forms import ReceivingLocationForm, DestinationLocationForm, CargoForm
 from django.shortcuts import render
 
 from django.conf import settings

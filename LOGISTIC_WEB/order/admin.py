@@ -1,6 +1,6 @@
 from django.contrib import admin
-from order.models import Order, Receiving_location, Destination_location, Vehicle, Cargo, Bill, Truck
-from order.calculater import testFunc
+from order.models import Order, Receiving_location, Destination_location, Cargo, Bill, Truck
+from order.calculater import testFunc, Calculate_Orders
 from django.urls import path
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -9,7 +9,6 @@ from django.shortcuts import render
 
 admin.site.register(Receiving_location)
 admin.site.register(Destination_location)
-admin.site.register(Vehicle)
 admin.site.register(Cargo)
 admin.site.register(Bill)
 admin.site.register(Truck)
@@ -18,12 +17,6 @@ admin.site.register(Truck)
 class OrderAdmin(admin.ModelAdmin):
     
     actions = ["run_testFunc"]
-
-    def run_testFunc(self, request):
-        testFunc()
-        self.message_user(request, "testFunc() worked", messages.SUCCESS)
-
-        return HttpResponseRedirect(reverse("admin:order_order_changelist"))
 
     def get_urls(self):
         urls = super().get_urls()

@@ -35,23 +35,14 @@ class Receiving_location(models.Model):
         return f"ID: {self.order.id} - {self.order.customer.username}"
 
 class Destination_location(models.Model): # Durak yerine bu sınıfı kullanacağız
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='Destination_location')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='destination_location')
     company_name = models.CharField(max_length=200)
     company_number = models.CharField(max_length=12)
     address = models.TextField()
     delivery_date = models.DateTimeField()
-
-class Vehicle(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='Vehicle')
-    type = models.CharField(max_length=30) # doblo, kamyon, tır vs. yada direkt aracın ismi olarak kullanırız 
-    price_km = models.IntegerField()
-    max_weight = models.IntegerField()
-    storage_height = models.IntegerField() # santimetre cinsinden
-    storage_width = models.IntegerField()
-    storage_length = models.IntegerField()
-    
+   
 class Cargo(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='Cargo')
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='cargo')
     type = models.CharField(max_length=30) # elma,armut,tabak taşınacak maddenin ismi /// opsiyonel
     weight = models.IntegerField()
     height = models.IntegerField()

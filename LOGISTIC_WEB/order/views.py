@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from order.forms import OrderForm,ReceivingLocationForm,DestinationLocationForm,VehicleForm,CargoForm,BillForm
-from order.models import Order, Receiving_location, Destination_location, Vehicle, Cargo, Bill
+from order.forms import OrderForm,ReceivingLocationForm,DestinationLocationForm,CargoForm,BillForm
+from order.models import Order, Receiving_location, Destination_location, Cargo, Bill
 from order import map
 from formtools.wizard.views import SessionWizardView
 
@@ -41,7 +41,7 @@ class OrderWizard(SessionWizardView):
 
         order = Order.objects.create(
             customer = self.request.user,
-            status = 'Aktif',
+            status = 'pasif',
             price = calculated_price
         )
 
@@ -55,16 +55,6 @@ class OrderWizard(SessionWizardView):
         Destination_location.objects.create(
             order = order,
             **form_data[1]
-        )
-
-        Vehicle.objects.create(
-            order = order,
-            type = "truck",
-            price_km = 2,
-            max_weight = 20000,
-            storage_height = 2000,
-            storage_width = 1500,
-            storage_length = 27500,
         )
 
         Cargo.objects.create(
