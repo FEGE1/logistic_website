@@ -124,7 +124,7 @@ def Calculate_Orders():
                             truck_id = truck[0]
                             truck_number_order = truck[4]
                             order_in_truck = Get_Filter_Table("orders","truck_id",truck_id)[0]
-
+    
                             try:
                                 if Route_Limiter(order,order_in_truck,2): # 2 saatlik (temsili) zaman farkı verdim şimdilik
                                     print("same space route limiter çalıştı")
