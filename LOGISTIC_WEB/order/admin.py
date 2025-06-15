@@ -11,11 +11,40 @@ admin.site.register(Receiving_location)
 admin.site.register(Destination_location)
 admin.site.register(Cargo)
 admin.site.register(Bill)
-admin.site.register(Truck)
+
+class ReceivingLocationInLine(admin.StackedInline):
+    model = Receiving_location
+    can_delete = False
+    extra = 0
+
+class DestinationLocationInLine(admin.StackedInline):
+    model = Destination_location
+    can_delete = False
+    extra = 0
+
+class CargoInLine(admin.StackedInline):
+    model = Cargo
+    can_delete = False
+    extra = 0
+
+class TruckInLine(admin.StackedInline):
+    model = Truck
+    can_delete = False
+    extra = 0
+
+class BillInLine(admin.StackedInline):
+    model = Bill
+    can_delete = False
+    extra = 0
+
+class OrderInLine(admin.StackedInline):
+    model = Order
+    can_delete = False
+    extra = 0
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    
+    inlines = [ReceivingLocationInLine, DestinationLocationInLine, CargoInLine, BillInLine]
     actions = ["run_testFunc"]
 
     def get_urls(self):
@@ -41,3 +70,7 @@ class OrderAdmin(admin.ModelAdmin):
         
         # GET ile gelindiyse onay sayfasını göster
         return render(request, "admin/order/order/confirm_test_func.html")
+
+@admin.register(Truck)
+class TruckAdmin(admin.ModelAdmin):
+    inlines = [OrderInLine]
