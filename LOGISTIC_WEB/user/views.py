@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout,authenticate
 from user.forms import UserMainForm, UserLoginForm
+from order.models import Order
 
 # Create your views here.
 
@@ -53,3 +54,17 @@ def LogoutView(request):
     logout(request)
     return redirect('index')
 
+def DashboardView(request):
+    if request.user.is_authenticated:
+        orders = Order.objects.filter(customer= request.user).order_by("-creation_date")
+
+        if orders:
+            context = {'orders':orders}
+        
+        else:
+            context = {'orders':[]}
+
+    else:
+        return redirect('index')
+
+    return render(request,"user/dashboard.html", {"orders": orders})

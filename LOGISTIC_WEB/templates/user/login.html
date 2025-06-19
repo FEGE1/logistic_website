@@ -10,7 +10,7 @@
             {% csrf_token %}
             {{LoginForm.as_p}}
             <p><a href="{% url 'user:register' %}">Create Account</a></p>
-            <input type="submit" name="" value="Register">
+            <input type="submit" name="" value="Login">
         </form>
     </section>
 {% endif %}

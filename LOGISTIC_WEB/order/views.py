@@ -4,9 +4,13 @@ from order.models import Order, Receiving_location, Destination_location, Cargo,
 from order import map
 from formtools.wizard.views import SessionWizardView
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
+@method_decorator(login_required, name='dispatch')
 class OrderWizard(SessionWizardView):
     
     form_list = [ReceivingLocationForm, DestinationLocationForm, CargoForm]
@@ -21,8 +25,13 @@ class OrderWizard(SessionWizardView):
         receiving = self.request.session.get('receiving',' ')
         destination = self.request.session.get('destination',' ')
 
-        context['receiving'] = receiving
-        context['destination'] = destination
+        if receiving and destination:
+            context['receiving'] = receiving
+            context['destination'] = destination
+
+        else:
+            context['receiving'] = " "
+            context['destination'] = " "
 
         return context
     
@@ -71,5 +80,8 @@ class OrderWizard(SessionWizardView):
         email=self.request.user.email or "default@example.com",
         satis_vergisi_kimligi="1234567890"
         )
+
+        self.request.session.pop('receiving', None)
+        self.request.session.pop('destination', None)
 
         return redirect('order:order_success')
