@@ -17,43 +17,31 @@
 <body>
     <!--NAVBAR-->
     <header>
-        <div id="top-bar">
-            <ul class="flex">
-                <li>
-                    <select name="language" id="language">
-                        <option value="default">ENG</option>
-                        <option value="Türkçe">TR</option>
-                    </select>
-                </li>
-                <li>
-                    <select name="currency" id="currency">
-                        <option value="USD">USD</option>
-                        <option value="TRY">TRY</option>
-                    </select>
-                </li>
-            </ul>
-            <div class="flex">
-                <span></span>
-                <p>+1 222 333 444</p>
-                <span></span>
-                <p>+90 537 732 07 95</p>
-            </div>
-        </div>
         <div class="navbar">
             <div id="logo">
-                <h2> <a href="{%  url 'index' %}"><span style="color:#0EF6CC;">Logo</span><span style="color:#ff545a;">Logo</span></a></h2>
+                <h2> <a href="{%  url 'index' %}">Logo</a></h2>
             </div>
             <ul class="nav-links">
-                <li><a href="#Home"><span style="color:#ff545a;">HOME</span></a></li>
                 <li><a href="#Aboutus">HOW IT WORKS</a></li>
                 <li><a href="#Contact">REVIEW</a></li>
                 <li><a href="#Contact">ABOUT US</a></li>
                 <li><a href="#Contact">CONTACT</a></li>
                 <li><a href="#Contact">CAREER</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'user:dashboard' %}">DASHBOARD</a></li>
+                {% endif %}
                 <li>
-                    <a href="#Contact">
-                        <button id="nav-btn"><span style="color: #ff545a;">Login</span>/Register</button>
-                    </a>
+                    {% if user.is_authenticated %}
+                        <a href="{%  url 'user:logout' %}">
+                            <button id="nav-btn">{{user.username}}<span style="color:rgb(154, 154, 154);font-size:12px;">-logout</span></button>
+                        </a>
+
+                    {% else %}
+                        <a href="{%  url 'user:login' %}">
+                            <button id="nav-btn"><span style="color: rgb(154, 154, 154);">Login</span>/Register</button>
+                        </a>
+
+                    {% endif %}
                 </li>
             </ul>
         </div>

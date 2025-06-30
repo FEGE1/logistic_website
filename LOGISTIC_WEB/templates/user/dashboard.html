@@ -1,0 +1,38 @@
+{% extends "included/layout.html" %}
+{% load static %}
+{% block body %}
+    <div class="dashboard-container">
+        <div class="dashboard-tabs">
+            <div class="dashboard-tab active">Aktif Siparişler</div>
+            <div class="dashboard-tab">Tamamlanmış Siparişler</div>
+            <a href="{% url 'order:create-order' %}" class="create-btn">Yeni Sipariş Oluştur</a>
+        </div>
+
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Sipariş ID</th>
+                    <th>Tarih</th>
+                    <th>Kargo</th>
+                    <th>Durum</th>
+                    <th>Tutar</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.creation_date }}</td>
+                    <td>{{ order.cargo.type }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.price }}</td>
+                    <td><form method="POST" action="">{% csrf_token %}
+                        <button class="cancel-btn" type="submit">İptal Et</button>
+                    </form></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>Sipariş Adımı: {{ wizard.steps.step1 }} / {{ wizard.steps.count }} </h2>
+{% extends "included/layout.html" %}
+{% load static %}
+{% block body %}
+<section  id="form-wizard">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ wizard.management_form }}
@@ -27,6 +22,5 @@
             <button type="submit">İleri</button>    
         </div>
     </form>
-    
-</body>
-</html>
+</section>
+{% endblock body %}

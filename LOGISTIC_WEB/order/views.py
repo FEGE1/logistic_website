@@ -1,30 +1,21 @@
 from django.shortcuts import render, redirect
-from order.forms import OrderForm,ReceivingLocationForm,DestinationLocationForm,VehicleForm,CargoForm,BillForm
-from order.models import Order, Receiving_location, Destination_location, Vehicle, Cargo, Bill
+from order.forms import OrderForm,ReceivingLocationForm,DestinationLocationForm,CargoForm,BillForm
+from order.models import Order, Receiving_location, Destination_location, Cargo, Bill
 from order import map
 from formtools.wizard.views import SessionWizardView
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
-def Form_Create(request):
-    receiving = request.session.pop('receiving',' ')
-    destination = request.session.pop('destination',' ')
-    order_code = request.session.pop('order_code',' ')
-
-    context = {
-        'receiving': receiving,
-        'destination': destination,
-        'order_code': order_code
-    }
-    #order code ile siparişin içinden receiving ve destinationları alıp js e atabilirim (refresh attığımda harita kaybolmasın diye)(indexteyken receiving ve destinationı kaydetmek lazım)
-    return render(request,'order/create_order.html', context=context)
-
+@method_decorator(login_required, name='dispatch')
 class OrderWizard(SessionWizardView):
     
-    form_list = [ReceivingLocationForm, DestinationLocationForm, VehicleForm,CargoForm]
+    form_list = [ReceivingLocationForm, DestinationLocationForm, CargoForm]
     
-    template_name = "order/form_wizard.html"
+    template_name = "order/create_order.html"
 
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
 
@@ -34,8 +25,13 @@ class OrderWizard(SessionWizardView):
         receiving = self.request.session.get('receiving',' ')
         destination = self.request.session.get('destination',' ')
 
-        context['receiving'] = receiving
-        context['destination'] = destination
+        if receiving and destination:
+            context['receiving'] = receiving
+            context['destination'] = destination
+
+        else:
+            context['receiving'] = " "
+            context['destination'] = " "
 
         return context
     
@@ -48,20 +44,13 @@ class OrderWizard(SessionWizardView):
             initial['address'] = self.request.session.get('destination', '')
         return initial
     
-    # Non-validation for go back in forms
-    def post(self, *args, **kwargs):  # ← BURAYA
-        if 'wizard_goto_step' in self.request.POST:
-            self.storage.current_step = self.request.POST['wizard_goto_step']
-            return self.render(self.get_form())
-        return super().post(*args, **kwargs)
-    
     def done(self, form_list, **kwargs):
 
         calculated_price = self.request.session.pop('calculated_price',' ')
 
         order = Order.objects.create(
             customer = self.request.user,
-            status = 'Aktif',
+            status = 'pasif',
             price = calculated_price
         )
 
@@ -77,14 +66,9 @@ class OrderWizard(SessionWizardView):
             **form_data[1]
         )
 
-        Vehicle.objects.create(
-            order = order,
-            **form_data[2]
-        )
-
         Cargo.objects.create(
             order = order,
-            **form_data[3]
+            **form_data[2]
         )
 
         Bill.objects.create(
@@ -97,4 +81,7 @@ class OrderWizard(SessionWizardView):
         satis_vergisi_kimligi="1234567890"
         )
 
-        return redirect('order_success')
+        self.request.session.pop('receiving', None)
+        self.request.session.pop('destination', None)
+
+        return redirect('order:order_success')

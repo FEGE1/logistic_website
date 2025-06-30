@@ -1,5 +1,5 @@
 from django import forms 
-from order.models import Order,Receiving_location,Destination_location,Vehicle,Cargo,Bill
+from order.models import Order,Receiving_location,Destination_location,Cargo,Bill
 
 
 class OrderForm(forms.ModelForm):
@@ -22,11 +22,6 @@ class DestinationLocationForm(forms.ModelForm):
         widgets = {
             'delivery_date': forms.DateInput(attrs={'type': 'date'})
         }
-
-class VehicleForm(forms.ModelForm):
-    class Meta():
-        model = Vehicle
-        fields = ('type','price_km','max_weight','storage_height','storage_width','storage_length')
 
 class CargoForm(forms.ModelForm):
     class Meta():
