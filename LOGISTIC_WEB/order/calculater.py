@@ -4,15 +4,8 @@ from order.models import Order, Truck
 from order.map import Calculate_Distance
 
 # Main()
-def testFunc():
-
+def testFunc():     
     Calculate_Orders()
-    """
-    order1 = Order.objects.get(id= 57)
-    order2 = Order.objects.get(id= 58)
-
-    print(Route_Limiter(order1, order2, 2))
-    """
 
 ###################################################
 
