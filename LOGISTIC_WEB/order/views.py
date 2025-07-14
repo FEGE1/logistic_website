@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from order.forms import OrderForm,ReceivingLocationForm,DestinationLocationForm,CargoForm,BillForm
 from order.models import Order, Receiving_location, Destination_location, Cargo, Bill
 from order import map
+from keys import google_maps_key
 from formtools.wizard.views import SessionWizardView
 
 from django.contrib.auth.decorators import login_required
@@ -21,6 +22,7 @@ class OrderWizard(SessionWizardView):
 
     def get_context_data(self, form, **kwargs):
         context = super().get_context_data(form, **kwargs)
+        context['google_maps_key'] = google_maps_key
         
         receiving = self.request.session.get('receiving',' ')
         destination = self.request.session.get('destination',' ')
