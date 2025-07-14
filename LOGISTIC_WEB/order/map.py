@@ -1,8 +1,9 @@
 import googlemaps
 from googlemaps import geocoding, directions, distance_matrix
 from datetime import datetime
+from keys import google_maps_key
 
-gmaps = googlemaps.Client(key='AIzaSyCylRnlEZdmLKjm1NzXZ5nO4RzvyNifhpk')
+gmaps = googlemaps.Client(key= google_maps_key)
 
 def Calculate_Direction(origin, destination):
 

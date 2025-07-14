@@ -215,7 +215,7 @@
     <!--Autocomplete JS-->
     <script src="{% static 'js/google_autocomplete.js' %}"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylRnlEZdmLKjm1NzXZ5nO4RzvyNifhpk&libraries=places&callback=initAutocomplete">
+        src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&libraries=places&callback=initAutocomplete">
     </script>
     
     {% endblock %}
